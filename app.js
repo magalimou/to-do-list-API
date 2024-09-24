@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const usuarioRoutes = require('./src/routes/usuarioRoutes')
+const proyectoRoutes = require('./src/routes/proyectoRoutes')
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(express.json()); // Para manejar JSON en las solicitudes
 
 // Rutas
 app.use('/usuario', usuarioRoutes);
+app.use('/proyecto', proyectoRoutes);
 
 
 // Iniciar el servidor
