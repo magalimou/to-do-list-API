@@ -46,8 +46,24 @@ const getProyectosByUsuario = async (req, res) => {
   }
 };
 
+const deleteProyecto = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const proyectoEliminado = await proyectoModel.deleteProyecto(id);
+    if (proyectoEliminado) {
+      res.status(200).json({ message: 'Proyecto eliminado exitosamente' });
+    } else {
+      res.status(404).json({ error: 'Proyecto no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar el proyecto' });
+  }
+}
+
 module.exports = {
   createProyecto,
   updateNombreProyecto,
-  getProyectosByUsuario
+  getProyectosByUsuario,
+  deleteProyecto
 };

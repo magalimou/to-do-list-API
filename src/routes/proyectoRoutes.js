@@ -7,5 +7,7 @@ router.post('/', proyectoController.createProyecto);
 router.patch('/:id', proyectoController.updateNombreProyecto);
 //listar todos los proyectos de un usuario
 router.get('/usuario/:id_usuario', proyectoController.getProyectosByUsuario);
+//borrar un proyecto por id
+router.delete('/:id', proyectoController.deleteProyecto);
 
 module.exports = router;
