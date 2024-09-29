@@ -17,14 +17,20 @@ const getCategoriasByProyecto = async (id_proyecto) => {
     return categorias;
 };
 
-//Borrar Tareas 
+const getCategoriaById = async (id) => {
+    const [categoria] = await db.query('SELECT * FROM Categoria WHERE id = ?', [id]);
+    return categoria;
+};
+
 const deleteCategoria = async (id) => {
-    await db.query('DELETE FROM Categoria WHERE id = ?', [id]);
+    const [result] = await db.query('DELETE FROM Categoria WHERE id = ?', [id]);
+    return result.affectedRows > 0;
 };
 
 module.exports = {
     createCategoria,
     updateNombreCategoria,
     getCategoriasByProyecto,
-    deleteCategoria,
+    getCategoriaById,
+    deleteCategoria
 };

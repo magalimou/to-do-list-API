@@ -13,6 +13,12 @@ const deleteTareaById = async (id) => {
     return result.affectedRows > 0;
 };
 
+//borrar todas las tareas de una categoria
+const deleteTareasByCategoria = async (id_categoria) => {
+  const [result] = await db.query('DELETE FROM Tarea WHERE id_categoria = ?', [id_categoria]);
+  return result.affectedRows > 0;
+};
+
 const updateTarea = async (id, { titulo, descripcion, estado, prioridad }) => {
     const [result] = await db.query(
       'UPDATE Tarea SET titulo = ?, descripcion = ?, estado = ?, prioridad = ? WHERE id = ?',
@@ -34,6 +40,7 @@ const getTareaById = async (id) => {
 module.exports = {
   createTarea,
   deleteTareaById,
+  deleteTareasByCategoria,
   updateTarea,
   getTareasByCategoria,
   getTareaById

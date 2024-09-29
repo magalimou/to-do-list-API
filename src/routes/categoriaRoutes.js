@@ -8,7 +8,9 @@ router.post('/', categoriaController.createCategoria);
 router.patch('/:id', categoriaController.updateNombreCategoria);
 //listar todas las categorias de un proyecto
 router.get('/proyecto/:id_proyecto', categoriaController.getCategoriasByProyecto);
-//borrar una categoria por id de proyecto
-router.delete('/:id', categoriaController.deleteCategoria);
+//listar una categoria por id
+router.get('/:id', categoriaController.getCategoriaById);
+//borrar una categoria por id 
+router.delete('/:id', categoriaController.deleteCategoriaById);
 
 module.exports = router;

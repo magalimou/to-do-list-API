@@ -1,4 +1,5 @@
 const categoriaModel = require('../models/categoriaModel');
+const tareaModel = require('../models/tareaModel');
 
 //crear categoria
 const createCategoria = async (req, res) => {
@@ -45,21 +46,42 @@ const getCategoriasByProyecto = async (req, res) => {
   }
 }
 
+const getCategoriaById = async (req, res) => {
+  const { id } = req.params;
+ 
+  try {
+    const categoria = await categoriaModel.getCategoriaById(id);
+    res.json(categoria);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener la categoria' });
+  }
+}
+
 //borrar una categoria por su id
-const deleteCategoria = async (req, res) => {
+const deleteCategoriaById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await categoriaModel.deleteCategoria(id);
-    res.json({ message: 'Categoria eliminada' });
+    // Primero elimina todas las tareas asociadas a la categoría
+    await tareaModel.deleteTareasByCategoria(id);
+
+    // Luego elimina la categoría
+    const resultado = await categoriaModel.deleteCategoria(id);
+
+    if (resultado) {
+      res.status(200).json({ message: 'Categoría y sus tareas eliminadas exitosamente' });
+    } else {
+      res.status(404).json({ error: 'Categoría no encontrada' });
+    }
   } catch (error) {
-    res.status(500).json({ error: 'Error al eliminar la categoria' });
+    res.status(500).json({ error: 'Error al eliminar la categoría y sus tareas' });
   }
-}
+};
 
 module.exports = {
     createCategoria,
     updateNombreCategoria,
     getCategoriasByProyecto,
-    deleteCategoria
+    getCategoriaById,
+    deleteCategoriaById
 };
