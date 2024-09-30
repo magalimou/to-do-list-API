@@ -27,10 +27,16 @@ const deleteCategoria = async (id) => {
     return result.affectedRows > 0;
 };
 
+const deleteCategoriaByProyecto = async (id_proyecto) => {
+    const [result] = await db.query('DELETE FROM Categoria WHERE id_proyecto = ?', [id_proyecto]);
+    return result.affectedRows > 0;
+}
+
 module.exports = {
     createCategoria,
     updateNombreCategoria,
     getCategoriasByProyecto,
     getCategoriaById,
-    deleteCategoria
+    deleteCategoria,
+    deleteCategoriaByProyecto
 };

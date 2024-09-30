@@ -24,6 +24,14 @@ const getProyectosByUsuario = async (id_usuario) => {
   return rows;
 };
 
+const getProyectoById = async (id) => {
+  const [rows] = await db.query(
+    'SELECT * FROM Proyecto WHERE id = ?',
+    [id]
+  );
+  return rows[0];
+};
+
 const deleteProyecto = async (id) => {
   const [result] = await db.query(
     'DELETE FROM Proyecto WHERE id = ?',
@@ -36,5 +44,6 @@ module.exports = {
   createProyecto,
   updateNombreProyecto,
   getProyectosByUsuario,
+  getProyectoById,
   deleteProyecto
 };
