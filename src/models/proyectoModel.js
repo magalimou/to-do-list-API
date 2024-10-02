@@ -17,18 +17,26 @@ const updateNombreProyecto = async (id, nombre) => {
 };
 
 const getProyectosByUsuario = async (id_usuario) => {
-  const [rows] = await db.query(
-    'SELECT * FROM Proyecto WHERE id_usuario = ?',
-    [id_usuario]
-  );
+  const [rows] = await db.query(`
+    SELECT
+      Proyecto.id AS id_proyecto,
+      Proyecto.id_usuario,
+      Proyecto.nombre,
+      Proyecto.descripcion
+    FROM Proyecto
+    WHERE Proyecto.id_usuario = ?`,[id_usuario]);
   return rows;
 };
 
 const getProyectoById = async (id) => {
-  const [rows] = await db.query(
-    'SELECT * FROM Proyecto WHERE id = ?',
-    [id]
-  );
+  const [rows] = await db.query(`
+    SELECT
+      Proyecto.id AS id_proyecto,  
+      Proyecto.id_usuario,
+      Proyecto.nombre,
+      Proyecto.descripcion  
+    FROM Proyecto 
+    WHERE Proyecto.id = ?`,[id]);
   return rows[0];
 };
 

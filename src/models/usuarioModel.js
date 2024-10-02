@@ -43,7 +43,13 @@ const loginUser = async (email, contrasena) => {
 };
 
 const getUserById = async (id) => {
-  const [rows] = await db.query('SELECT * FROM Usuario WHERE id = ?', [id]);
+  const [rows] = await db.query(`
+    SELECT 
+      Usuario.id AS id_usuario,
+      Usuario.nombre,
+      Usuario.email 
+    FROM Usuario 
+    WHERE Usuario.id = ?`, [id]);
   return rows[0];
 };
 

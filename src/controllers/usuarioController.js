@@ -5,7 +5,7 @@ const createUser = async (req, res) => {
   const { nombre, email, contrasena } = req.body;
   try {
     const userId = await usuarioModel.createUser(nombre, email, contrasena);
-    res.status(201).json({ id: userId });
+    res.status(201).json({ id_usuario: userId });
   } catch (error) {
     if (error.message === 'EMAIL_ALREADY_EXISTS') {
       res.status(400).json({ error: 'El correo electrónico ya está registrado' });

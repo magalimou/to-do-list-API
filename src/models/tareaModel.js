@@ -28,18 +28,42 @@ const updateTarea = async (id, { titulo, descripcion, estado, prioridad }) => {
 };
 
 const getTareasByCategoria = async (id_categoria) => {
-    const [tareas] = await db.query('SELECT * FROM Tarea WHERE id_categoria = ?', [id_categoria]);
+    const [tareas] = await db.query(`
+      SELECT
+        Tarea.id AS id_tarea,  
+        Tarea.id_categoria,
+        Tarea.titulo,
+        Tarea.descripcion,
+        Tarea.estado,
+        Tarea.prioridad 
+      FROM Tarea 
+      WHERE id_categoria = ?`, [id_categoria]);
     return tareas;
 };
 
 const getTareaById = async (id) => {
-    const [tarea] = await db.query('SELECT * FROM Tarea WHERE id = ?', [id]);
+    const [tarea] = await db.query(`
+      SELECT 
+        Tarea.id AS id_tarea,  
+        Tarea.id_categoria,
+        Tarea.titulo,
+        Tarea.descripcion,
+        Tarea.estado,
+        Tarea.prioridad 
+      FROM Tarea 
+      WHERE id = ?`, [id]);
     return tarea[0];
 }
 
 const getTareasFinalizadasByUsuario = async (id_usuario) => {
   const [tareas] = await db.query(`
-    SELECT Tarea.*
+    SELECT
+      Tarea.id AS id_tarea,  
+      Tarea.id_categoria,
+      Tarea.titulo,
+      Tarea.descripcion,
+      Tarea.estado,
+      Tarea.prioridad
     FROM Tarea
     JOIN Categoria ON Tarea.id_categoria = Categoria.id
     JOIN Proyecto ON Categoria.id_proyecto = Proyecto.id

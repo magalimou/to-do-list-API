@@ -13,12 +13,26 @@ const updateNombreCategoria = async (id, nombre, descripcion) => {
 };
 
 const getCategoriasByProyecto = async (id_proyecto) => {
-    const [categorias] = await db.query('SELECT * FROM Categoria WHERE id_proyecto = ?', [id_proyecto]);
+    const [categorias] = await db.query(`
+        SELECT 
+            Categoria.id AS id_categoria,  -- Renombrar id a id_categoria
+            Categoria.id_proyecto,
+            Categoria.nombre,
+            Categoria.descripcion
+        FROM Categoria 
+        WHERE id_proyecto = ?`, [id_proyecto]);
     return categorias;
 };
 
 const getCategoriaById = async (id) => {
-    const [categoria] = await db.query('SELECT * FROM Categoria WHERE id = ?', [id]);
+    const [categoria] = await db.query(`
+        SELECT 
+            Categoria.id AS id_categoria,  
+            Categoria.id_proyecto,
+            Categoria.nombre,
+            Categoria.descripcion
+        FROM Categoria 
+        WHERE id = ?`, [id]);
     return categoria;
 };
 
