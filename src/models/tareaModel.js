@@ -37,11 +37,24 @@ const getTareaById = async (id) => {
     return tarea[0];
 }
 
+const getTareasFinalizadasByUsuario = async (id_usuario) => {
+  const [tareas] = await db.query(`
+    SELECT Tarea.*
+    FROM Tarea
+    JOIN Categoria ON Tarea.id_categoria = Categoria.id
+    JOIN Proyecto ON Categoria.id_proyecto = Proyecto.id
+    WHERE Proyecto.id_usuario = ? AND Tarea.estado = 'Finalizado'
+  `, [id_usuario]);
+
+  return tareas;
+};
+
 module.exports = {
   createTarea,
   deleteTareaById,
   deleteTareasByCategoria,
   updateTarea,
   getTareasByCategoria,
-  getTareaById
+  getTareaById,
+  getTareasFinalizadasByUsuario
 };

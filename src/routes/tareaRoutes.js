@@ -12,6 +12,9 @@ router.patch('/:id', tareaController.updateTarea);
 router.get('/categoria/:id_categoria', tareaController.getTareasByCategoria);
 //obtener tarea por id
 router.get('/:id', tareaController.getTareaById);
+//obtener tareas completadas
+router.get('/usuario/:id_usuario/finalizadas', tareaController.getTareasFinalizadasByUsuario);
+
 
 
 

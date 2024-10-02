@@ -11,7 +11,7 @@ const createProyecto = async (req, res) => {
 
   try {
     const nuevoProyectoId = await proyectoModel.createProyecto(id_usuario, nombre, descripcion);
-    res.status(201).json({ id: nuevoProyectoId, message: 'Proyecto creado exitosamente' });
+    res.status(201).json({ id_proyecto: nuevoProyectoId, message: 'Proyecto creado exitosamente' });
   } catch (error) {
     res.status(500).json({ error: 'Error al crear el proyecto' });
   }

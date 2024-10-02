@@ -9,7 +9,7 @@ const createTarea = async (req, res) => {
 
   try {
     const nuevaTareaId = await tareaModel.createTarea(id_categoria, titulo, descripcion, estado, prioridad);
-    res.status(201).json({ id: nuevaTareaId, message: 'Tarea creada exitosamente' });
+    res.status(201).json({ id_tarea: nuevaTareaId, message: 'Tarea creada exitosamente' });
   } catch (error) {
     res.status(500).json({ error: 'Error al crear la tarea' });
   }
@@ -72,10 +72,23 @@ const getTareaById = async (req, res) => {
     }
 };
 
+const getTareasFinalizadasByUsuario = async (req, res) => {
+  const { id_usuario } = req.params;
+
+  try {
+    const tareas = await tareaModel.getTareasFinalizadasByUsuario(id_usuario);
+    res.json(tareas);
+  } catch (error) {
+    console.error('Error al obtener las tareas finalizadas:', error);
+    res.status(500).json({ error: 'Error al obtener las tareas finalizadas' });
+  } 
+};
+
 module.exports = {
   createTarea,
   deleteTareaById,
   updateTarea,
   getTareasByCategoria,
-  getTareaById
+  getTareaById,
+  getTareasFinalizadasByUsuario
 };
