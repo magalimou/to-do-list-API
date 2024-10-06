@@ -1,6 +1,7 @@
 const proyectoModel = require('../models/proyectoModel');
 const categoriaModel = require('../models/categoriaModel');
 const tareaModel = require('../models/tareaModel');
+const usuarioModel = require('../models/usuarioModel');
 
 const createProyecto = async (req, res) => {
   const { id_usuario, nombre, descripcion } = req.body;
@@ -10,8 +11,16 @@ const createProyecto = async (req, res) => {
   }
 
   try {
+
+    const usuario = await usuarioModel.getUserById(id_usuario);
+
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
     const nuevoProyectoId = await proyectoModel.createProyecto(id_usuario, nombre, descripcion);
     res.status(201).json({ id_proyecto: nuevoProyectoId, message: 'Proyecto creado exitosamente' });
+    
   } catch (error) {
     res.status(500).json({ error: 'Error al crear el proyecto' });
   }
