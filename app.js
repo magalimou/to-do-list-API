@@ -18,6 +18,9 @@ app.use('/proyectos', proyectoRoutes);
 app.use('/categorias', categoriaRoutes);
 app.use('/tareas', tareaRoutes);
 
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido a la API de To-Do List!');
+});
 
 // Iniciar el servidor
 app.listen(port, () => {
