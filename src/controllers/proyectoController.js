@@ -1,5 +1,4 @@
 const proyectoModel = require('../models/proyectoModel');
-const categoriaModel = require('../models/categoriaModel');
 const tareaModel = require('../models/tareaModel');
 const usuarioModel = require('../models/usuarioModel');
 
@@ -11,7 +10,6 @@ const createProyecto = async (req, res) => {
   }
 
   try {
-
     const usuario = await usuarioModel.getUserById(id_usuario);
 
     if (!usuario) {
@@ -76,24 +74,16 @@ const deleteProyecto = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Obtener las categorías del proyecto
-    const categorias = await categoriaModel.getCategoriasByProyecto(id);
-
-    // Borrar tareas de cada categoría
-    for (const categoria of categorias) {
-      await tareaModel.deleteTareasByCategoria(categoria.id);  // Borrar tareas por id de categoría
-    }
-
-    // Borrar las categorías del proyecto
-    await categoriaModel.deleteCategoriaByProyecto(id);
+    // Borrar todas las tareas asociadas al proyecto
+    await tareaModel.deleteTareasByProyecto(id);
 
     // Finalmente, borrar el proyecto
     await proyectoModel.deleteProyecto(id);
 
-    res.json({ message: 'Proyecto y todos sus datos asociados eliminados correctamente' });
+    res.json({ message: 'Proyecto y todas sus tareas asociadas eliminados correctamente' });
   } catch (error) {
     console.error('Error al eliminar el proyecto:', error);
-    res.status(500).json({ error: 'Error al eliminar el proyecto y sus datos asociados' });
+    res.status(500).json({ error: 'Error al eliminar el proyecto y sus tareas asociadas' });
   }
 };
 
@@ -104,3 +94,4 @@ module.exports = {
   getProyectoById,
   deleteProyecto
 };
+
