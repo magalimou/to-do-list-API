@@ -9,7 +9,7 @@ router.delete('/:id', tareaController.deleteTareaById);
 //editar tarea
 router.patch('/:id', tareaController.updateTarea);
 //obtener todas las tareas de una categoria
-router.get('/categoria/:id_categoria', tareaController.getTareasByCategoria);
+router.get('/proyecto/:id_proyecto', tareaController.getTareasByProyecto);
 //obtener tarea por id
 router.get('/:id', tareaController.getTareaById);
 //obtener tareas completadas
