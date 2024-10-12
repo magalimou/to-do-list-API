@@ -21,7 +21,7 @@ app.use('/tareas', tareaRoutes);
 
 // Ruta principal
 app.get('/', (req, res) => {
-  res.send('¡Bienvenido a la API de To-Do List!');
+  res.send('¡Bienvenido a la API de To-Do List version2!');
 });
 
 // Iniciar el servidor
