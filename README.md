@@ -1,6 +1,6 @@
 # To-Do List API  
 
-This is a RESTful API for managing a **to-do list**, allowing users to create, read, update, and delete tasks. It is built using **Node.js** and **Express**, and stores data in a **MongoDB** database.  
+This is a RESTful API for managing a **to-do list**, allowing users to create, read, update, and delete tasks. It is built using **Node.js** and **Express**, and stores data in a **MySQL** database.  
 
 ## Features  
 
@@ -19,7 +19,7 @@ This is a RESTful API for managing a **to-do list**, allowing users to create, r
 
 ### Prerequisites  
 - Node.js (v16 or higher recommended)  
-- MongoDB  
+- MySQL Server
 
 ### Steps  
 
@@ -38,9 +38,12 @@ This is a RESTful API for managing a **to-do list**, allowing users to create, r
    - Create a `.env` file in the root directory.  
    - Add the following:  
      ```bash
-     PORT=3000
-     MONGO_URI=mongodb://localhost:27017/todolist
-     JWT_SECRET=yourSecret
+     PORT=5000
+     DB_HOST=your_db_host
+     DB_USER=your_db_user
+     DB_PASSWORD=password
+     DB_NAME=your_database_name
+     JWT_SECRET=your_secret_key
      ```  
 
 4. Start the server:  
@@ -48,4 +51,4 @@ This is a RESTful API for managing a **to-do list**, allowing users to create, r
    npm start
    ```  
 
-   The API will run on `http://localhost:3000`.  
+   The API will run on `http://localhost:5000`.  
